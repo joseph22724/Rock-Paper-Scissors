@@ -57,8 +57,8 @@ function playRound() {
 }
 
 function playGame () {
-    var humanScore = 0;
-    var computerScore = 0;
+    humanScore = 0;
+    computerScore = 0;
      
     playRound();
     playRound();
@@ -66,10 +66,18 @@ function playGame () {
     playRound();
     playRound();
 
-    console.log("Human: " + humanScore);
-    console.log("CPU: " + computerScore);
+    if (humanScore > computerScore){
+        console.log("You Won the game.");
+    } else {
+        console.log("The Computer Won, You lose.");
+    }
+
+    console.log("Human Score: " + humanScore);
+    console.log("CPU Score: " + computerScore);
 }
 
+let humanScore = 0;
+let computerScore = 0;
 playGame();
 
 
