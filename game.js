@@ -30,7 +30,9 @@ function getComputerChoice () {
       });
 
     const body = document.querySelector("#body")
-    const result = document.createElement("div");
+    const result = document.createElement("div")
+    const choices = document.createElement("div")
+    body.appendChild(choices);
     body.appendChild(result);
 
 
@@ -42,13 +44,16 @@ function playRound(choice) {
     if (humanChoice == "rock") {
         if (computerChoice == "scissors") {
             console.log("Win, rock beats scissors");
+            choices.textContent = "Computer: Scissors";
             result.textContent = "Win, rock beats scissors";
             return humanScore += 1;
         } else if (computerChoice == "paper"){
             console.log("Lose, paper beats rock");
+            choices.textContent = "Computer: Paper";
             result.textContent = "Lose, paper beats rock";
             return computerScore += 1;
         } else { console.log("tie");
+            choices.textContent = "";
             result.textContent = "tie";
         }
     }
