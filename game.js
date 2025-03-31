@@ -29,61 +29,106 @@ function getComputerChoice () {
         playRound("scissors");
       });
 
+    
+
+    const userScore = document.querySelector("#userScore")
+    const cpuScore = document.querySelector("#cpuScore")
+    let humanScore = 0;
+    let computerScore = 0; 
+
     const body = document.querySelector("#body")
+    const divBtns = document.querySelector("#container")
     const result = document.createElement("div")
     const choices = document.createElement("div")
+    const gameEnd = document.createElement("h3")
+    const reset = document.createElement("button")
+
+    reset.textContent = "Reset";
+    reset.setAttribute("id", "resetBtn")
     body.appendChild(choices);
     body.appendChild(result);
+    body.appendChild(gameEnd);
 
+function resetGame () {
+    humanScore = 0;
+    computerScore = 0;
+    body.removeChild(reset);
+    choices.textContent = "";
+    result.textContent = "";
+    gameEnd.textContent = "";
+    userScore.textContent = (humanScore);
+    cpuScore.textContent = (computerScore);
+};
 
+reset.addEventListener("click", () => {
+    resetGame();
+});
 
 function playRound(choice) {
     const humanChoice = choice;
     const computerChoice = getComputerChoice();
 
+    if (humanScore == 5|| computerScore == 5){
+        return 0;
+    };
+
     if (humanChoice == "rock") {
         if (computerChoice == "scissors") {
-            console.log("Win, rock beats scissors");
             choices.textContent = "Computer: Scissors";
             result.textContent = "Win, rock beats scissors";
-            return humanScore += 1;
+            humanScore += 1;
+            userScore.textContent = (humanScore);
         } else if (computerChoice == "paper"){
-            console.log("Lose, paper beats rock");
             choices.textContent = "Computer: Paper";
             result.textContent = "Lose, paper beats rock";
-            return computerScore += 1;
-        } else { console.log("tie");
+            computerScore += 1;
+            cpuScore.textContent = (computerScore);
+        } else { 
             choices.textContent = "";
-            result.textContent = "tie";
+            result.textContent = "Tie";
         }
     }
 
     else if (humanChoice == "paper") {
         if (computerChoice == "rock") {
-            console.log("Win, paper beats rock");
+            choices.textContent = "Computer: Rock";
             result.textContent = "Win, paper beats rock";
-            return humanScore += 1;
+            humanScore += 1;
+            userScore.textContent = (humanScore);
         } else if (computerChoice == "scissors"){
-            console.log("Lose, Scissors beats paper");
+            choices.textContent = "Computer: Scissors";
             result.textContent = "Lose, Scissors beats paper";
-            return computerScore += 1;
+            computerScore += 1;
+            cpuScore.textContent = (computerScore);
         } else { console.log("tie");
-            result.textContent = "tie";
+            choices.textContent = "";
+            result.textContent = "Tie";
         }
     }
 
     else if (humanChoice == "scissors") {
         if (computerChoice == "paper") {
-            console.log("Win, Scissors beats paper");
+            choices.textContent = "Computer: Paper";
             result.textContent = "Win, Scissors beats paper";
-            return humanScore += 1;
+            humanScore += 1;
+            userScore.textContent = (humanScore);
         } else if (computerChoice == "rock"){
-            console.log("Lose. rock beats scissors");
+            choices.textContent = "Computer: Rock";
             result.textContent = "Lose. rock beats scissors";
-            return computerScore += 1;
+            computerScore += 1;
+            cpuScore.textContent = (computerScore);
         } else { console.log("tie");
+            choices.textContent = "";
             result.textContent = "Tie";
         }
+    }
+
+    if (humanScore == 5) {
+        gameEnd.textContent = "You Won!"
+        body.appendChild(reset);
+    } else if (computerScore == 5) {
+        gameEnd.textContent = "You Lost, Computer Wins!"
+        body.appendChild(reset);
     }
 }
 

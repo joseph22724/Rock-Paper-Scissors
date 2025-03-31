@@ -1,1 +1,1 @@
-# Rock-Paper-Scissors
+# A simple Rock-Paper-Scissors web game
